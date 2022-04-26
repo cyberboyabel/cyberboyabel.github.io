@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <title>Abels cyberspace</title>
+
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <script>
+	document.addEventListener( 'DOMContentLoaded', event => {
+		const slideshows = document.querySelectorAll( '.slideshow' );
+		const slideshow_speed = 5000;
+
+		const nextSlide = slideshow => {
+		  const slides = slideshow.querySelectorAll( 'div' );
+		  slides.forEach( slide => slide.style.opacity = 0 );
+
+		  let index = parseInt( slideshow.dataset.index ) + 1;
+		  if ( index > slides.length ) index = 1;
+
+		  slideshow.dataset.index = index;
+
+		  const nextslide = slideshow.querySelector( 'div:nth-child(' + index + ')' );
+		  nextslide.style.opacity = 1;
+
+		  slideshow.dataset.timeout =
+		  	setTimeout( nextSlide, 2000, slideshow );
+		}
+
+		const hoverSlide = event => {
+			const slide = event.target;
+			const slideshow = slide.closest( '.slideshow' );
+
+			clearTimeout( slideshow.dataset.timeout );
+		}
+		const resumeSlideshow = event => {
+			const slide = event.target;
+			const slideshow = slide.closest( '.slideshow' );
+
+			slideshow.dataset.timeout =
+				setTimeout( nextSlide, 2000, slideshow );
+		}
+
+		let lastrowlength = 3;
+		if ( slideshows.length % 3 != 0 )
+			lastrowlength = slideshows.length - 3 * Math.floor( slideshows.length / 3 );
+
+		slideshows.forEach( ( slideshow, index ) => {
+			slideshow.dataset.index = 0;
+			slideshow.dataset.timeout =
+				setTimeout( nextSlide, index * 100, slideshow );
+
+			slideshow.addEventListener( 'mouseover', hoverSlide );
+			slideshow.addEventListener( 'mouseout', resumeSlideshow );
+
+
+			if ( index >= slideshows.length - lastrowlength )
+				slideshow.classList.add( 'last-row' );
+		} );
+	} );
+  </script>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      border: 0;
+      outline: 0;
+      /* box-sizing: border-box; */
+
+      /* text */
+      /* text-align: center;
+      font-family: courier;
+      font-style: italic;
+      font-size: 100/3vW;
+      top: 50px;
+      position: relative;
+      background-color: red; */
+    }
+
+    html, body { height: 100% }
+    /* body { background-color: orange } */
+    h1 { font-family: Apfel Grotezk; font-size: 3vW; color: blue;}
+    /* background-img { heigth:100vH; } */
+
+    /*
+    body { font-family: Verdana, sans-serif }
+    */
+
+    .name{
+      font-family: Apfel Grotezk;
+      font-size: 5vW;
+      color: blue;
+      /* left: 1%; */
+      margin-left: 1%;
+      top: -0.2%;
+      position: relative;
+      /* background-color: pink; */
+    }
+
+    .name:hover:before {
+      content:"hover projects to stop slideshow";
+      color: red;
+    }
+
+    .name:hover:before{
+      display: block;
+    }
+
+    .name:hover span {
+      display: none;
+    }
+
+    /* .name:hover {
+    	transform: scale(1.3);
+    	z-index: +1;
+      left: 16%;
+    } */
+
+    /* .title{
+      text-align: center;
+      font-family: arial;
+      font-style: italic;
+      font-size: 20px;
+      /* top: 45%; */
+      /* position: relative; */
+      }
+
+    /* Slideshow container */
+    .project {
+      position: relative;
+      display: grid;
+      grid-template-columns: auto auto auto;
+      /* height: 100vH; */
+      /* background-color: #2196F3; */
+      /* padding: 10px; */
+      /* width: 300px;
+      height: 300px; */
+    }
+
+    .title{
+      text-align: center;
+      font-family: Apfel Grotezk;
+      /* font-style: italic; */
+      /* font-size: 20px; */
+      font-size: 2vW;
+/*       top: 45%; */
+      position: relative;
+      }
+
+    .title > span {
+      position: absolute;
+  		top: 50%; left: 50%;
+  		width: 100%;
+  		transform: translate(-50%, -50%);
+  		display: inline-block;
+	 }
+
+    .slideshow {
+      position: relative;
+      color: red;
+      /* height: calc(100vw * 1080 / 1080); */
+/*       height: 50vH; */
+      width: calc(100% / 3 ); /* 33.33vW; */
+      margin-right: -4px;
+      aspect-ratio: 1;
+      /* display: grid;
+      grid-template-columns: auto auto auto; */
+      background-color: rgba(255, 255, 255, 0.8);
+      border: 1px solid rgba(0, 0, 0, 0.8);
+      /* padding: 20px; */
+      /* font-size: 30px; */
+      /* text-align: center; */
+      box-sizing: border-box;
+      display: inline-block;
+      vertical-align: top;
+
+      transform: scale(1);
+      transform-origin: 50% 50%;
+      transition: transform 0.15s;
+    }
+	.slideshow:nth-child(3n - 2) { transform-origin: 0 50% }
+    .slideshow:nth-child(3n) { transform-origin: 100% 50% }
+
+	.slideshow:nth-child(1) { transform-origin: 0 0 }
+	.slideshow:nth-child(2) { transform-origin: 50% 0 }
+	.slideshow:nth-child(3) { transform-origin: 100% 0 }
+
+    .slideshow.last-row:nth-child(3n-2) { transform-origin: 0 100% }
+    .slideshow.last-row:nth-child(3n-1) { transform-origin: 50% 100% }
+    .slideshow.last-row:nth-child(3n) { transform-origin: 100% 100% }
+
+    .slideshow:hover {
+    	transform: scale(1.3);
+    	z-index: +1;
+    }
+
+    .slideshow > div {
+      position: absolute;
+      top: 0; left: 0;
+      /* top: 10px; */
+      /* left: 10px; */
+      /* width: 30vW; */
+      width: 100%;
+      height: 100%;
+      /* height: 20vH; */
+	    /* background-color: #0f0; */
+      background-size: cover;
+      background-position: center;
+      background-repeat: none;
+      opacity: 0;
+      transition: opacity .5s;
+    }
+    @media screen and (max-width: 1000px) {
+        .slideshow:hover { transform: scale(1.1) };
+        .title {font-size: 10px};
+    }
+    @media screen and (max-width: 800px) {
+        .slideshow:hover { transform: scale(1.1) };
+        .title {font-size: 10px};
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="name">ABELS CYBERSPACE :-)</div>
+
+  <div class="project">
+
+    <div class="slideshow">
+      <div class="title"><span>
+        <h1>Contact information</h1>
+        <p>Abel van As</p>
+        <p>Graphic Design student at KABK</p>
+        <p>Royal Academy of Art</p>
+        <p>abelonweb@gmail.com</p>
+        </span></div>
+
+    </div>
+
+    <div class="slideshow">
+      <div class="title"><span>
+        <h1>KABK Film House</h1>
+        <p>Physical posters series for</p>
+        <p>Weekly film house within the KABK</p>
+        <p>with @bella.inan @hilalmutluel @superson</p>
+        <p>2022</p>
+        </span></div>
+        <div style="background-image:url(assets/images/kabk-film-house1.jpg)"></div>
+        <div style="background-image:url(assets/images/kabk-film-house2.jpg)"></div>
+        <div style="background-image:url(assets/images/kabk-film-house3.jpg)"></div>
+        <div style="background-image:url(assets/images/kabk-film-house4.jpg)"></div>
+        <div style="background-image:url(assets/images/kabk-film-house5.jpg)"></div>
+
+    </div>
+
+    <div class="slideshow">
+    <div class="title"><span>
+      <h1>George film festival</h1>
+      <h1>visual identity</h1>
+      <p>Vlexible visual system, guided by Martin Lorenz</p>
+      <p>2021</p>
+        </span></div>
+        <div style="background-image:url(assets/images/george1.png)"></div>
+        <div style="background-image:url(assets/images/george2.png)"></div>
+        <div style="background-image:url(assets/images/george3.png)"></div>
+        <div style="background-image:url(assets/images/george4.png)"></div>
+        <div style="background-image:url(assets/images/george5.png)"></div>
+        <div style="background-image:url(assets/images/george6.png)"></div>
+        <div style="background-image:url(assets/images/george7.png)"></div>
+        <div style="background-image:url(assets/images/george8.png)"></div>
+        <div style="background-image:url(assets/images/george9.png)"></div>
+
+    </div>
+
+
+    <div class="slideshow">
+		<div class="title"><span>
+			<h1>Data Temples</h1>
+			<p>Data centres versus Roman Catholic Church</p>
+      <p>Project about power structure</p>
+      <p>guided by Katrin Korfmann and Maarten Cornel</p>
+      <p>2021</p>
+        </span></div>
+        <div style="background-image:url(assets/images/data-centra1.jpg)"></div>
+        <div style="background-image:url(assets/images/data-centra2.jpg)"></div>
+        <div style="background-image:url(assets/images/data-centra3.jpg)"></div>
+        <div style="background-image:url(assets/images/data-centra4.jpeg)"></div>
+
+    </div>
+
+    <div class="slideshow">
+		<div class="title"><span>
+			<h1>The Work of Representation</h1>
+			<p>Redesign of a book by Stuart Hall, a group project</p>
+      <p>guided by Els Kuijpers</p>
+      <p>2021</p>
+        </span></div>
+        <div style="background-image:url(assets/images/representation1.jpg)"></div>
+        <div style="background-image:url(assets/images/representation2.jpg)"></div>
+        <div style="background-image:url(assets/images/representation3.jpg)"></div>
+        <div style="background-image:url(assets/images/representation4.jpg)"></div>
+        <div style="background-image:url(assets/images/representation5.jpg)"></div>
+
+    </div>
+
+    <div class="slideshow">
+		<div class="title"><span>
+			<h1>Futurism</h1>
+  			<p>offline poster sketches</p>
+        <p>guided by Susana Carvalho</p>
+        <p>2019</p>
+        </span></div>
+        <div style="background-image:url(assets/images/design_poster_sketch1.png)"></div>
+        <div style="background-image:url(assets/images/design_poster_sketch2.png)"></div>
+
+    </div>
+
+    <div class="slideshow">
+      	<div class="title"><span>
+			<h1>PlayLab</h1>
+			<p>Project about the effect of humans on planet Earth</p>
+      <p>guided by Roosje Klap and Marthe Prins</p>
+      <p>2020</p>
+        </span></div>
+        <div style="background-image:url(assets/images/playlab1.png)"></div>
+        <div style="background-image:url(assets/images/playlab2.png)"></div>
+
+    </div>
+
+    <div class="slideshow">
+      <div class="title"><span>
+        <h1>KABK Film House</h1>
+        <p>Physical posters series for</p>
+        <p>Weekly film house within the KABK</p>
+        <p>with @bella.inan @hilalmutluel @superson</p>
+        <p>2021 - 2022</p>
+	    </span></div>
+      <div style="background-image:url(assets/images/kabk-film-house-extra1.jpg)"></div>
+      <div style="background-image:url(assets/images/kabk-film-house-extra2.jpg)"></div>
+      <div style="background-image:url(assets/images/kabk-film-house-extra3.jpg)"></div>
+
+    </div>
+
+    <div class="slideshow">
+      <div class="title"><span>
+        <h1>random</h1>
+        <p>random sketches hehe</p>
+	    </span></div>
+      <div style="background-image:url(assets/images/random.jpg)"></div>
+      <div style="background-image:url(assets/images/feelings.jpg)"></div>
+      <div style="background-image:url(assets/images/grandpa.jpg)"></div>
+      <div style="background-image:url(assets/images/jeans.jpg)"></div>
+      <div style="background-image:url(assets/images/princes.jpg)"></div>
+
+    </div>
+
+    <div class="slideshow">
+      <div class="title"><span>
+        <h1>Volkskrant redesign</h1>
+        <p>ongoing project</p>
+	    </span></div>
+      <div style="background-image:url(assets/images/volkskrant1.jpg)"></div>
+      <div style="background-image:url(assets/images/volkskrant2.jpg)"></div>
+      <div style="background-image:url(assets/images/volkskrant3.jpg)"></div>
+      <div style="background-image:url(assets/images/volkskrant4.jpg)"></div>
+
+    </div>
+
+    <div class="slideshow">
+      <div class="title"><span>
+        <h1>If it ain't Dutch, it ain't much</h1>
+        <p>Serious satire about Dutch culture</p>
+        <p>2022</p>
+	    </span></div>
+      <div style="background-image:url(assets/images/dutch1.png)"></div>
+      <div style="background-image:url(assets/images/dutch2.png)"></div>
+      <div style="background-image:url(assets/images/dutch3.png)"></div>
+      <div style="background-image:url(assets/images/dutch4.png)"></div>
+      <div style="background-image:url(assets/images/dutch5.png)"></div>
+      <div style="background-image:url(assets/images/dutch7.png)"></div>
+
+
+    </div>
+
+
+
+
+
+
+
+  </div>
+
+</body>
+
+</html>
