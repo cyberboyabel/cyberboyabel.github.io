@@ -10,7 +10,7 @@
   <script>
 	document.addEventListener( 'DOMContentLoaded', event => {
 		const slideshows = document.querySelectorAll( '.slideshow' );
-		const slideshow_speed = 5000;
+		const slideshow_speed = 6000;
 
 		const nextSlide = slideshow => {
 		  const slides = slideshow.querySelectorAll( 'div' );
@@ -25,7 +25,7 @@
 		  nextslide.style.opacity = 1;
 
 		  slideshow.dataset.timeout =
-		  	setTimeout( nextSlide, 2000, slideshow );
+		  	setTimeout( nextSlide, 3000, slideshow );
 		}
 
 		const hoverSlide = event => {
@@ -39,7 +39,7 @@
 			const slideshow = slide.closest( '.slideshow' );
 
 			slideshow.dataset.timeout =
-				setTimeout( nextSlide, 2000, slideshow );
+				setTimeout( nextSlide, 3000, slideshow );
 		}
 
 		let lastrowlength = 3;
@@ -251,8 +251,6 @@
         <div style="background-image:url(assets/images/kabk-film-house1.jpg)"></div>
         <div style="background-image:url(assets/images/kabk-film-house2.jpg)"></div>
         <div style="background-image:url(assets/images/kabk-film-house3.jpg)"></div>
-        <div style="background-image:url(assets/images/kabk-film-house4.jpg)"></div>
-        <div style="background-image:url(assets/images/kabk-film-house5.jpg)"></div>
 
     </div>
 
@@ -265,13 +263,7 @@
         </span></div>
         <div style="background-image:url(assets/images/george1.png)"></div>
         <div style="background-image:url(assets/images/george2.png)"></div>
-        <div style="background-image:url(assets/images/george3.png)"></div>
         <div style="background-image:url(assets/images/george4.png)"></div>
-        <div style="background-image:url(assets/images/george5.png)"></div>
-        <div style="background-image:url(assets/images/george6.png)"></div>
-        <div style="background-image:url(assets/images/george7.png)"></div>
-        <div style="background-image:url(assets/images/george8.png)"></div>
-        <div style="background-image:url(assets/images/george9.png)"></div>
 
     </div>
 
@@ -285,7 +277,6 @@
       <p>2021</p>
         </span></div>
         <div style="background-image:url(assets/images/data-centra1.jpg)"></div>
-        <div style="background-image:url(assets/images/data-centra2.jpg)"></div>
         <div style="background-image:url(assets/images/data-centra3.jpg)"></div>
         <div style="background-image:url(assets/images/data-centra4.jpeg)"></div>
 
@@ -299,8 +290,6 @@
       <p>2021</p>
         </span></div>
         <div style="background-image:url(assets/images/representation1.jpg)"></div>
-        <div style="background-image:url(assets/images/representation2.jpg)"></div>
-        <div style="background-image:url(assets/images/representation3.jpg)"></div>
         <div style="background-image:url(assets/images/representation4.jpg)"></div>
         <div style="background-image:url(assets/images/representation5.jpg)"></div>
 
@@ -350,9 +339,7 @@
         <p>random sketches hehe</p>
 	    </span></div>
       <div style="background-image:url(assets/images/random.jpg)"></div>
-      <div style="background-image:url(assets/images/feelings.jpg)"></div>
       <div style="background-image:url(assets/images/grandpa.jpg)"></div>
-      <div style="background-image:url(assets/images/jeans.jpg)"></div>
       <div style="background-image:url(assets/images/princes.jpg)"></div>
 
     </div>
@@ -365,7 +352,6 @@
       <div style="background-image:url(assets/images/volkskrant1.jpg)"></div>
       <div style="background-image:url(assets/images/volkskrant2.jpg)"></div>
       <div style="background-image:url(assets/images/volkskrant3.jpg)"></div>
-      <div style="background-image:url(assets/images/volkskrant4.jpg)"></div>
 
     </div>
 
@@ -376,10 +362,7 @@
         <p>2022</p>
 	    </span></div>
       <div style="background-image:url(assets/images/dutch1.png)"></div>
-      <div style="background-image:url(assets/images/dutch2.png)"></div>
-      <div style="background-image:url(assets/images/dutch3.png)"></div>
       <div style="background-image:url(assets/images/dutch4.png)"></div>
-      <div style="background-image:url(assets/images/dutch5.png)"></div>
       <div style="background-image:url(assets/images/dutch7.png)"></div>
 
 
